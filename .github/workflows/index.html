@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แนะนำตัวเอง</title>
+    <style>
+        body {
+            background-color: #FFFDD0; /* สีครีม Cream */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .my-name {
+            color: #FF69B4; /* สีชมพู Hot Pink */
+            font-size: 2em;
+            margin-top: 20px;
+        }
+        
+        .birthday-title {
+            color: #0000FF; /* สีน้ำเงิน */
+        }
+        
+        .birthday-date {
+            color: #FF0000; /* สีแดง */
+        }
+
+        .age-text {
+            background-color: #87CEEB; /* สีฟ้า Sky Blue */
+            color: #ffffff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .profile-img {
+            margin-top: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .fb-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 15px;
+            background-color: #1877F2; /* สีน้ำเงิน Facebook */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        .fb-link:hover {
+            background-color: #145DBF;
+        }
+
+        .about-me-box {
+            background-color: #ffffff;
+            border: 2px dashed #FF69B4;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: 20px auto;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.05);
+        }
+        .about-me-title {
+            color: #FF69B4;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .about-me-text {
+            color: #333333;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+        
+        /* สไตล์สำหรับกล่องวิดีโอและเพลง */
+        .media-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 450px;
+            margin: 20px auto;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+        .media-title {
+            color: #FF69B4;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        video {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+        }
+        audio {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        .nav-btn:hover {
+            background-color: #ff4da6;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="my-name">ปิยะพงษ์ ทองโม๊ะ</h1>
+
+    <img src="https://img1.pic.in.th/images/piyapong.jpg" alt="piyapong" width="150" class="profile-img">    
+    
+    <br>
+    <a href="https://www.facebook.com/piyapong.tongmo" target="_blank" class="fb-link">Facebook ของฉัน</a>
+
+    <div class="about-me-box">
+        <div class="about-me-title"> เกี่ยวกับฉัน </div>
+        <p class="about-me-text">"เป็นเพื่อนกับผมดีกว่า เดียวผมมีเงินล้นฟ้าอะ"</p>
+    </div>
+
+    <hr>
+
+    <h2 class="birthday-title">วัน/เดือน/ปีเกิด</h2>
+    <p class="birthday-date">23/10/2552</p>
+
+    <hr>
+
+    <h3>อายุ</h3>
+    <p class="age-text">17 ปี</p>
+
+    <hr>
+
+    <h4>สถานศึกษาปัจจุบัน</h4>
+    <p>วิทยาลัยเทคนิคเชียงใหม่</p>
+
+    <hr>
+
+    <h5>สิ่งที่ชอบ</h5>
+    <p>เล่นเกม ดูอนิเมะ ฟังเพลง</p>
+
+    <hr>
+
+    <div class="media-container">
+        <video controls autoplay muted loop id="myVideo">
+            <source src="videoshtml.4.mp4" type="video/mp4">
+            เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ
+        </video>
+
+        <div class="media-title" style="margin-top: 15px;">🎵 เพลงประกอบเว็บ (เล่นอัตโนมัติ)</div>
+        <audio id="bgMusic" controls loop>
+            <source src="song.mp3" type="audio/mpeg">
+            เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
+        </audio>
+    </div>
+    
+    <button class="nav-btn" onclick="window.location.href='page2.html'">Go to Page 2</button>
+    <button class="nav-btn" onclick="window.location.href='page3.html'">Go to Page 3</button>
+
+    <script>
+        document.addEventListener('click', function() {
+            var video = document.getElementById("myVideo");
+            var audio = document.getElementById("bgMusic");
+            
+            // เปิดเสียงวิดีโอและเปิดเพลงให้ดังขึ้นพร้อมกันเมื่อคลิกหน้าจอ
+            video.muted = false;
+            video.play();
+            audio.play().catch(function(error) {
+                console.log("Autoplay บล็อกโดยเบราว์เซอร์: ", error);
+            });
+        }, { once: true }); // ให้ทำงานแค่การคลิกครั้งแรกครั้งเดียวพอ
+    </script>
+
+</body>
+</html>
