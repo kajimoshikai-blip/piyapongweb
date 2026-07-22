@@ -1,64 +1,229 @@
 <!DOCTYPE html>
-<html>
+<html lang="th">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>หน้า 2 - ทักษะและอาชีพ</title>
+    <!-- นำเข้าฟอนต์ Kanit จาก Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap">
     <style>
+        :root {
+            --primary-color: #FF69B4;
+            --secondary-color: #87CEEB;
+            --accent-color: #1877F2;
+            --bg-color: #FFFDD0;
+            --card-bg: #FFFFFF;
+            --text-main: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kanit', sans-serif;
+        }
+
         body {
-            background-color: #FFFDD0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 30px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container หลัก จัดกลางหน้าจอ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* โซน Header */
+        .header-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
             text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 2px solid #FFF5EE;
         }
-        h2 {
-            color: #FF69B4;
-            margin-top: 30px;
+
+        .page-title {
+            color: var(--primary-color);
+            font-size: 2em;
+            font-weight: 600;
         }
-        ul, ol {
-            display: inline-block;
-            text-align: left;
-            font-size: 1.2em;
-            color: #333333;
-        }
-        .nav-btn {
-            padding: 10px 20px;
+
+        .subtitle {
+            color: #777;
             font-size: 1em;
-            background-color: #FF69B4;
+            margin-top: 5px;
+        }
+
+        /* โซนเนื้อหาแบบ Grid (2 คอลัมน์) */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* กล่องการ์ด */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.03);
+            border: 1px solid #E0E0E0;
+        }
+
+        .card-title {
+            color: var(--primary-color);
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #FFF0F5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* สไตล์สำหรับ List ทักษะ (Unordered List) */
+        .skill-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .skill-list li {
+            background-color: #FFF0F5;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+            font-size: 1.05em;
+            color: #444;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* สไตล์สำหรับ ลำดับอาชีพ (Ordered List) */
+        .job-list {
+            list-style: none;
+            counter-reset: job-counter;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .job-list li {
+            counter-increment: job-counter;
+            background-color: #F0F8FF;
+            padding: 12px 16px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary-color);
+            font-size: 1.05em;
+            color: #444;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .job-list li::before {
+            content: counter(job-counter);
+            background-color: var(--secondary-color);
+            color: white;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        /* เมนูปุ่มกดนำทางด้านล่าง */
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            font-size: 1em;
+            background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 30px;
             cursor: pointer;
-            margin: 15px 5px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+            transition: all 0.2s ease;
         }
+
         .nav-btn:hover {
             background-color: #ff4da6;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive สำหรับมือถือ */
+        @media (max-width: 600px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .nav-container { flex-direction: column; }
+            .nav-btn { width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <h1>หน้า 2</h1>
-    <hr>
+    <div class="container">
+        
+        <!-- Header Zone -->
+        <header class="header-card">
+            <h1 class="page-title">หน้า 2</h1>
+            <p class="subtitle">ทักษะที่ต้องการพัฒนา และเป้าหมายอาชีพในอนาคต</p>
+        </header>
 
-    <h2>รายการทักษะที่ต้องการพัฒนา</h2>
-    <ul>
-        <li>ทักษะการเขียนโปรแกรม</li>
-        <li>ทักษะภาษาอังกฤษ</li>
-        <li>ทักษะการซ่อมบำรุงและประกอบคอมพิวเตอร์</li>
-    </ul>
+        <!-- Main Content Zone (2 Columns Grid) -->
+        <main class="content-grid">
+            
+            <!-- การ์ดที่ 1: รายการทักษะ -->
+            <section class="card">
+                <h2 class="card-title">🚀 รายการทักษะที่ต้องการพัฒนา</h2>
+                <ul class="skill-list">
+                    <li>💻 ทักษะการเขียนโปรแกรม</li>
+                    <li>🌐 ทักษะภาษาอังกฤษ</li>
+                    <li>🛠️ ทักษะการซ่อมบำรุงและประกอบคอมพิวเตอร์</li>
+                </ul>
+            </section>
 
-    <hr>
+            <!-- การ์ดที่ 2: ลำดับอาชีพ -->
+            <section class="card">
+                <h2 class="card-title">🎯 ลำดับอาชีพที่อยากทำ</h2>
+                <ol class="job-list">
+                    <li>โปรแกรมเมอร์</li>
+                    <li>เจ้าของร้านประกอบคอม</li>
+                    <li>นักแคสเกม</li>
+                </ol>
+            </section>
 
-    <h2>ลำดับอาชีพที่อยากทำ</h2>
-    <ol>
-        <li>โปรแกรมเมอร์</li>
-        <li>เจ้าร้านประกอบคอม</li>
-        <li>นักแคสเกม</li>
-    </ol>
+        </main>
 
-    <hr>
-    
-    <button class="nav-btn" onclick="window.location.href='index.html'">กลับหน้าแรก</button>
-    <button class="nav-btn" onclick="window.location.href='page3.html.html'">Go to Page 3</button>
+        <!-- Navigation Zone -->
+        <footer class="nav-container">
+            <button class="nav-btn" onclick="window.location.href='index.html'">กลับหน้าแรก</button>
+            <button class="nav-btn" onclick="window.location.href='page3.html'">Go to Page 3</button>
+        </footer>
+
+    </div>
 
 </body>
 </html>
