@@ -64,6 +64,40 @@
             margin-top: 5px;
         }
 
+        /* โซน API นาฬิกาดิจิทัล */
+        .clock-card {
+            background: linear-gradient(135deg, #ffffff 0%, #fff0f5 100%);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.03);
+            border: 1px solid #FFE4E1;
+        }
+
+        .clock-title {
+            color: var(--primary-color);
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .time-display {
+            font-size: 2.5em;
+            font-weight: 600;
+            color: #333;
+            letter-spacing: 2px;
+            margin: 5px 0;
+        }
+
+        .date-display {
+            font-size: 1em;
+            color: #666;
+        }
+
         /* โซนเนื้อหาแบบ Grid (2 คอลัมน์) */
         .content-grid {
             display: grid;
@@ -179,6 +213,7 @@
             .content-grid { grid-template-columns: 1fr; }
             .nav-container { flex-direction: column; }
             .nav-btn { width: 100%; }
+            .time-display { font-size: 2em; }
         }
     </style>
 </head>
@@ -191,6 +226,13 @@
             <h1 class="page-title">หน้า 2</h1>
             <p class="subtitle">ทักษะที่ต้องการพัฒนา และเป้าหมายอาชีพในอนาคต</p>
         </header>
+
+        <!-- API Clock Zone (ส่วนแสดงนาฬิกาดิจิทัล Real-time) -->
+        <section class="clock-card">
+            <div class="clock-title">⏰ เวลาปัจจุบัน (Digital Clock API)</div>
+            <div class="time-display" id="time-text">00:00:00</div>
+            <div class="date-display" id="date-text">กำลังโหลดวันที่...</div>
+        </section>
 
         <!-- Main Content Zone (2 Columns Grid) -->
         <main class="content-grid">
@@ -224,6 +266,32 @@
         </footer>
 
     </div>
+
+    <script>
+        // ==========================================
+        // Real-time Digital Clock & Date Script
+        // ==========================================
+        function updateClock() {
+            const now = new Date();
+            
+            // Format เวลา (HH:MM:SS)
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('time-text').innerText = `${hours}:${minutes}:${seconds}`;
+
+            // Format วันที่ภาษาไทย
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const thaiDate = now.toLocaleDateString('th-TH', options);
+            document.getElementById('date-text').innerText = thaiDate;
+        }
+
+        // อัปเดตเวลาทุกๆ 1 วินาที (1000 ms)
+        setInterval(updateClock, 1000);
+
+        // เรียกทำงานทันทีที่โหลดหน้าเว็บ
+        updateClock();
+    </script>
 
 </body>
 </html>
