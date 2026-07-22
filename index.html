@@ -3,188 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แนะนำตัวเอง</title>
+    <title>แนะนำตัวเอง - ปิยะพงษ์</title>
+    <!-- นำเข้าฟอนต์ Kanit จาก Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap">
     <style>
-        body {
-            background-color: #FFFDD0; /* สีครีม Cream */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .my-name {
-            color: #FF69B4; /* สีชมพู Hot Pink */
-            font-size: 2em;
-            margin-top: 20px;
-        }
-        
-        .birthday-title {
-            color: #0000FF; /* สีน้ำเงิน */
-        }
-        
-        .birthday-date {
-            color: #FF0000; /* สีแดง */
+        :root {
+            --primary-color: #FF69B4;
+            --secondary-color: #87CEEB;
+            --accent-color: #1877F2;
+            --bg-color: #FFFDD0;
+            --card-bg: #FFFFFF;
+            --text-main: #333333;
         }
 
-        .age-text {
-            background-color: #87CEEB; /* สีฟ้า Sky Blue */
-            color: #ffffff;
-            padding: 5px 15px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding: 30px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Container หลัก จัดกลางหน้าจอ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* โซนโปรไฟล์หลัก */
+        .profile-card {
+            background-color: var(--card-bg);
             border-radius: 20px;
-            display: inline-block;
-            font-weight: bold;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 2px solid #FFF5EE;
+            position: relative;
         }
 
         .profile-img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 6px 12px rgba(255, 105, 180, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .my-name {
+            color: var(--primary-color);
+            font-size: 2.2em;
+            font-weight: 600;
             margin-top: 15px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
         }
 
         .fb-link {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 8px 15px;
-            background-color: #1877F2; /* สีน้ำเงิน Facebook */
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 8px 20px;
+            background-color: var(--accent-color);
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            font-size: 0.9em;
-            font-weight: bold;
+            border-radius: 25px;
+            font-size: 0.95em;
+            font-weight: 400;
+            transition: background-color 0.2s, transform 0.2s;
         }
+
         .fb-link:hover {
             background-color: #145DBF;
+            transform: translateY(-2px);
         }
 
         .about-me-box {
-            background-color: #ffffff;
-            border: 2px dashed #FF69B4;
-            padding: 15px;
-            border-radius: 10px;
-            max-width: 400px;
-            margin: 20px auto;
-            box-shadow: 0px 4px 6px rgba(0,0,0,0.05);
+            background-color: #FFF0F5;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
         }
-        .about-me-title {
-            color: #FF69B4;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+
         .about-me-text {
-            color: #333333;
+            color: #555;
             font-style: italic;
             font-size: 1.1em;
         }
-        
-        /* สไตล์สำหรับกล่องวิดีโอและเพลง */
-        .media-container {
-            background-color: #ffffff;
-            border-radius: 10px;
+
+        /* โซนเนื้อหาแบบ Grid (2 คอลัมน์) */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        /* กล่องการ์ดทั่วไป */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
             padding: 20px;
-            max-width: 450px;
-            margin: 20px auto;
-            box-shadow: 0px 4px 8px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        .media-title {
-            color: #FF69B4;
-            font-weight: bold;
+
+        .info-card h3 {
+            font-size: 1em;
+            color: #888;
+            margin-bottom: 5px;
+            font-weight: 300;
+        }
+
+        .info-card p {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .birthday-date { color: #FF4500; }
+        .age-badge {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        /* สไตล์สำหรับการ์ด API */
+        .api-card {
+            border: 1px solid #E0E0E0;
+            position: relative;
+        }
+
+        .api-title {
+            font-weight: 600;
             margin-bottom: 10px;
-            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.05em;
         }
+
+        .api-content {
+            color: #444;
+            font-size: 0.95em;
+            min-height: 45px;
+        }
+
+        .api-btn {
+            margin-top: 12px;
+            padding: 6px 14px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.85em;
+            color: white;
+            align-self: flex-start;
+            transition: opacity 0.2s;
+        }
+
+        .api-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* สไตล์รูปสำหรับ Dog API */
+        .dog-img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-top: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* โซนสื่อมีเดีย */
+        .media-card {
+            text-align: center;
+        }
+
+        .media-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
         video {
             width: 100%;
-            max-width: 400px;
-            border-radius: 8px;
+            border-radius: 12px;
             margin-bottom: 15px;
-            box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
+
         audio {
             width: 100%;
-            max-width: 400px;
+        }
+
+        /* เมนูปุ่มกดนำทางด้านล่าง */
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
         }
 
         .nav-btn {
-            padding: 10px 20px;
+            padding: 12px 30px;
             font-size: 1em;
-            background-color: #FF69B4;
+            background-color: var(--primary-color);
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 30px;
             cursor: pointer;
-            margin-top: 15px;
-            margin-left: 5px;
-            margin-right: 5px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+            transition: all 0.2s ease;
         }
+
         .nav-btn:hover {
             background-color: #ff4da6;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive สำหรับมือถือ */
+        @media (max-width: 600px) {
+            .my-name { font-size: 1.8em; }
+            .content-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <h1 class="my-name">ปิยะพงษ์ ทองโม๊ะ</h1>
+    <div class="container">
+        
+        <!-- 1. Header Profile Box -->
+        <section class="profile-card">
+            <img src="https://img1.pic.in.th/images/piyapong.jpg" alt="piyapong" class="profile-img">
+            <h1 class="my-name">ปิยะพงษ์ ทองโม๊ะ</h1>
+            <a href="https://www.facebook.com/piyapong.tongmo" target="_blank" class="fb-link">
+                <span>Facebook ของฉัน</span>
+            </a>
 
-    <img src="https://img1.pic.in.th/images/piyapong.jpg" alt="piyapong" width="150" class="profile-img">    
-    
-    <br>
-    <a href="https://www.facebook.com/piyapong.tongmo" target="_blank" class="fb-link">Facebook ของฉัน</a>
+            <div class="about-me-box">
+                <p class="about-me-text">"เป็นเพื่อนกับผมดีกว่า เดียวผมมีเงินล้นฟ้าอะ"</p>
+            </div>
+        </section>
 
-    <div class="about-me-box">
-        <div class="about-me-title"> เกี่ยวกับฉัน </div>
-        <p class="about-me-text">"เป็นเพื่อนกับผมดีกว่า เดียวผมมีเงินล้นฟ้าอะ"</p>
+        <!-- 2. Grid Content Zone (ข้อมูลส่วนตัว) -->
+        <div class="content-grid">
+            
+            <div class="card info-card">
+                <h3>วัน/เดือน/ปีเกิด</h3>
+                <p class="birthday-date">23 ตุลาคม 2552</p>
+                
+                <h3 style="margin-top: 15px;">อายุ</h3>
+                <p><span class="age-badge">17 ปี</span></p>
+            </div>
+
+            <div class="card info-card">
+                <h3>สถานศึกษาปัจจุบัน</h3>
+                <p style="color: #2e7d32;">วิทยาลัยเทคนิคเชียงใหม่</p>
+
+                <h3 style="margin-top: 15px;">สิ่งที่ชอบ</h3>
+                <p style="color: #6a1b9a;">เล่นเกม • ดูอนิเมะ • ฟังเพลง</p>
+            </div>
+
+        </div>
+
+        <!-- 3. Grid API Zone (รวม 3 APIs) -->
+        <div class="content-grid">
+            
+            <!-- API 1: สภาพอากาศ (Open-Meteo API) -->
+            <div class="card api-card" style="background: linear-gradient(135deg, #ffffff 0%, #e1f5fe 100%);">
+                <div class="api-title" style="color: #0288d1;">🌤️ สภาพอากาศเชียงใหม่ (API 1)</div>
+                <div class="api-content" id="weather-info">กำลังโหลดข้อมูลสภาพอากาศ...</div>
+                <button class="api-btn" style="background-color: #0288d1;" onclick="getWeather()">อัปเดตอากาศ 🔄</button>
+            </div>
+
+            <!-- API 2: คำแนะนำประจำวัน (Advice Slip API) -->
+            <div class="card api-card" style="background: linear-gradient(135deg, #ffffff 0%, #f3e5f5 100%);">
+                <div class="api-title" style="color: #7b1fa2;">💡 ข้อคิดประจำวัน (API 2)</div>
+                <div class="api-content" id="advice-info">กำลังโหลดข้อคิด...</div>
+                <button class="api-btn" style="background-color: #7b1fa2;" onclick="getAdvice()">สุ่มข้อคิดใหม่ 🔄</button>
+            </div>
+
+        </div>
+
+        <!-- API 3: สุ่มรูปน้องหมาน่ารักๆ (Dog CEO API) -->
+        <div class="card api-card" style="background: linear-gradient(135deg, #ffffff 0%, #fff3e0 100%); align-items: center; text-align: center;">
+            <div class="api-title" style="color: #e65100;">🐶 สุ่มรูปสุนัขน่ารักๆ (API 3)</div>
+            <div class="api-content" id="dog-info" style="width: 100%;">กำลังโหลดรูปภาพ...</div>
+            <button class="api-btn" style="background-color: #e65100; align-self: center;" onclick="getDogImage()">สุ่มรูปหมาใหม่ 🔄</button>
+        </div>
+
+        <!-- 4. Media Zone -->
+        <section class="card media-card">
+            <video controls autoplay muted loop id="myVideo">
+                <source src="film.mp4" type="video/mp4">
+                เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ
+            </video>
+
+            <div class="media-title">🎵 เพลงประกอบเว็บ (เล่นอัตโนมัติเมื่อคลิก)</div>
+            <audio id="bgMusic" controls loop>
+                <source src="song.mp3" type="audio/mpeg">
+                เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
+            </audio>
+        </section>
+
+        <!-- 5. Navigation Buttons -->
+        <div class="nav-container">
+            <button class="nav-btn" onclick="window.location.href='page2.html'">Go to Page 2</button>
+            <button class="nav-btn" onclick="window.location.href='page3.html'">Go to Page 3</button>
+        </div>
+
     </div>
-
-    <hr>
-
-    <h2 class="birthday-title">วัน/เดือน/ปีเกิด</h2>
-    <p class="birthday-date">23/10/2552</p>
-
-    <hr>
-
-    <h3>อายุ</h3>
-    <p class="age-text">17 ปี</p>
-
-    <hr>
-
-    <h4>สถานศึกษาปัจจุบัน</h4>
-    <p>วิทยาลัยเทคนิคเชียงใหม่</p>
-
-    <hr>
-
-    <h5>สิ่งที่ชอบ</h5>
-    <p>เล่นเกม ดูอนิเมะ ฟังเพลง</p>
-
-    <hr>
-
-    <div class="media-container">
-        <video controls autoplay muted loop id="myVideo">
-            <source src="film.mp4" type="video/mp4">
-            เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ
-        </video>
-
-        <div class="media-title" style="margin-top: 15px;">🎵 เพลงประกอบเว็บ (เล่นอัตโนมัติ)</div>
-        <audio id="bgMusic" controls loop>
-            <source src="song.mp3" type="audio/mpeg">
-            เบราว์เซอร์ของคุณไม่รองรับการเล่นเสียง
-        </audio>
-    </div>
-    
-    <button class="nav-btn" onclick="window.location.href='page2.html'">Go to Page 2</button>
-    <button class="nav-btn" onclick="window.location.href='page3.html'">Go to Page 3</button>
 
     <script>
+        // ==========================================
+        // 1. Weather API (ดึงอุณหภูมิเชียงใหม่แบบ Real-time)
+        // ==========================================
+        async function getWeather() {
+            const el = document.getElementById('weather-info');
+            el.innerText = 'กำลังโหลดข้อมูล...';
+            try {
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=18.79&longitude=98.98&current_weather=true');
+                const data = await res.json();
+                const temp = data.current_weather.temperature;
+                const wind = data.current_weather.windspeed;
+                el.innerHTML = `📍 <b>อุณหภูมิปัจจุบัน:</b> ${temp} °C<br>💨 <b>ความเร็วลม:</b> ${wind} km/h`;
+            } catch (err) {
+                el.innerText = 'ไม่สามารถดึงข้อมูลสภาพอากาศได้';
+            }
+        }
+
+        // ==========================================
+        // 2. Advice Slip API (ดึงข้อคิด/คำแนะนำภาษาอังกฤษ)
+        // ==========================================
+        async function getAdvice() {
+            const el = document.getElementById('advice-info');
+            el.innerText = 'กำลังโหลดข้อมูล...';
+            try {
+                const res = await fetch('https://api.adviceslip.com/advice');
+                const data = await res.json();
+                el.innerHTML = `<i>"${data.slip.advice}"</i>`;
+            } catch (err) {
+                el.innerText = 'ไม่สามารถดึงข้อมูลข้อคิดได้';
+            }
+        }
+
+        // ==========================================
+        // 3. Dog CEO API (ดึงสุ่มรูปสุนัขแบบภาพสด)
+        // ==========================================
+        async function getDogImage() {
+            const el = document.getElementById('dog-info');
+            el.innerText = 'กำลังโหลดรูปภาพ...';
+            try {
+                const res = await fetch('https://dog.ceo/api/breeds/image/random');
+                const data = await res.json();
+                el.innerHTML = `<img src="${data.message}" alt="Dog Image" class="dog-img">`;
+            } catch (err) {
+                el.innerText = 'ไม่สามารถดึงรูปภาพสุนัขได้';
+            }
+        }
+
+        // เรียกทำงาน APIs ทั้งหมดเมื่อโหลดหน้าเว็บ
+        getWeather();
+        getAdvice();
+        getDogImage();
+
+        // สคริปต์เปิดเสียงมัลติมีเดียเมื่อคลิกครั้งแรก
         document.addEventListener('click', function() {
             var video = document.getElementById("myVideo");
             var audio = document.getElementById("bgMusic");
             
-            // เปิดเสียงวิดีโอและเปิดเพลงให้ดังขึ้นพร้อมกันเมื่อคลิกหน้าจอ
             video.muted = false;
             video.play();
             audio.play().catch(function(error) {
                 console.log("Autoplay บล็อกโดยเบราว์เซอร์: ", error);
             });
-        }, { once: true }); // ให้ทำงานแค่การคลิกครั้งแรกครั้งเดียวพอ
+        }, { once: true });
     </script>
 
 </body>
