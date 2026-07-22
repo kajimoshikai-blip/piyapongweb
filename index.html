@@ -186,14 +186,12 @@
             opacity: 0.85;
         }
 
-        /* สไตล์รูปสำหรับ Dog API */
-        .dog-img {
-            width: 100%;
-            max-height: 250px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-top: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        /* สไตล์แสดงตัวเลขนับผู้ชมเว็บ */
+        .visitor-count {
+            font-size: 2.2em;
+            font-weight: 600;
+            color: #e65100;
+            margin: 5px 0;
         }
 
         /* โซนสื่อมีเดีย */
@@ -308,11 +306,14 @@
 
         </div>
 
-        <!-- API 3: สุ่มรูปน้องหมาน่ารักๆ (Dog CEO API) -->
+        <!-- API 3: ยอดผู้ชมเว็บไซต์ (Visitor Counter API) -->
         <div class="card api-card" style="background: linear-gradient(135deg, #ffffff 0%, #fff3e0 100%); align-items: center; text-align: center;">
-            <div class="api-title" style="color: #e65100;">🐶 สุ่มรูปสุนัขน่ารักๆ (API 3)</div>
-            <div class="api-content" id="dog-info" style="width: 100%;">กำลังโหลดรูปภาพ...</div>
-            <button class="api-btn" style="background-color: #e65100; align-self: center;" onclick="getDogImage()">สุ่มรูปหมาใหม่ 🔄</button>
+            <div class="api-title" style="color: #e65100;">👀 จำนวนผู้ชมเว็บไซต์ (API 3)</div>
+            <div class="api-content" id="visitor-info" style="width: 100%;">
+                <div class="visitor-count" id="visit-count">0</div>
+                <span style="font-size: 0.85em; color: #666;">จำนวนครั้งที่มีผู้เข้าชมเว็บหน้านี้</span>
+            </div>
+            <button class="api-btn" style="background-color: #e65100; align-self: center;" onclick="getVisitorCount()">รีเฟรชยอดชม 🔄</button>
         </div>
 
         <!-- 4. Media Zone -->
@@ -371,24 +372,37 @@
         }
 
         // ==========================================
-        // 3. Dog CEO API (ดึงสุ่มรูปสุนัขแบบภาพสด)
+        // 3. Visitor Counter API (ระบบนับจำนวนผู้เข้าชมเว็บไซต์)
         // ==========================================
-        async function getDogImage() {
-            const el = document.getElementById('dog-info');
-            el.innerText = 'กำลังโหลดรูปภาพ...';
+        async function getVisitorCount() {
+            const countEl = document.getElementById('visit-count');
             try {
-                const res = await fetch('https://dog.ceo/api/breeds/image/random');
+                // เรียกใช้ API นับจำนวนคนเข้าชม (นับเพิ่มขึ้นทีละ 1 ทุกครั้งที่โหลดหน้า)
+                const res = await fetch('https://api.counterapi.dev/v1/piyapong-portfolio/page-views/up');
                 const data = await res.json();
-                el.innerHTML = `<img src="${data.message}" alt="Dog Image" class="dog-img">`;
+                if (data && data.count) {
+                    countEl.innerText = data.count.toLocaleString();
+                } else {
+                    // หาก API หลักมีปัญหา จะดึงข้อมูลจาก LocalStorage สำรองให้แทน
+                    updateLocalVisitorCount();
+                }
             } catch (err) {
-                el.innerText = 'ไม่สามารถดึงรูปภาพสุนัขได้';
+                updateLocalVisitorCount();
             }
+        }
+
+        // ระบบสำรองนับยอดเข้าชมผ่าน Browser Memory กรณี API มีปัญหา
+        function updateLocalVisitorCount() {
+            let visits = parseInt(localStorage.getItem('site_visits') || '100');
+            visits += 1;
+            localStorage.setItem('site_visits', visits);
+            document.getElementById('visit-count').innerText = visits.toLocaleString();
         }
 
         // เรียกทำงาน APIs ทั้งหมดเมื่อโหลดหน้าเว็บ
         getWeather();
         getAdvice();
-        getDogImage();
+        getVisitorCount();
 
         // สคริปต์เปิดเสียงมัลติมีเดียเมื่อคลิกครั้งแรก
         document.addEventListener('click', function() {
